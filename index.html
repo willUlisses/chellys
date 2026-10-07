@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chelly's Confeitaria - Bolos decorados, cookies recheados e doces artesanais em Alagoas. Atendimento personalizado e take away." />
+  <title>Chelly's Confeitaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:        #F06EA0;
+      --pink-light:  #FAD4E6;
+      --pink-pale:   #FFF0F7;
+      --teal:        #5ECFC1;
+      --teal-light:  #C4EDE9;
+      --teal-pale:   #F0FAFA;
+      --ink:         #2C2230;
+      --ink-soft:    #5A4A5A;
+      --white:       #FDFCFE;
+      --border:      rgba(240, 110, 160, 0.18);
+      --radius-sm:   12px;
+      --radius-md:   20px;
+      --radius-lg:   32px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 4px 24px rgba(240, 110, 160, 0.10);
+      --shadow-card: 0 8px 40px rgba(44, 34, 48, 0.10);
+      --transition:  0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+
+    /* ─── UTILITY ──────────────────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .section-title span {
+      color: var(--teal);
+    }
+
+    /* ─── NAV ──────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(253, 252, 254, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      transition: box-shadow var(--transition);
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 2px 20px rgba(240, 110, 160, 0.10);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav__logo-mark {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+    }
+
+    .nav__logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .nav__logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+    }
+
+    .nav__logo-sub {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-top: 1px;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      transition: color var(--transition);
+    }
+
+    .nav__links a:hover { color: var(--pink); }
+
+    .nav__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pink);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .nav__cta:hover {
+      background: #d95a8e;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(240, 110, 160, 0.35);
+    }
+
+    .nav__cta:active { transform: scale(0.98); }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .nav__mobile {
+      display: none;
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 99;
+      box-shadow: 0 8px 32px rgba(44, 34, 48, 0.08);
+    }
+
+    .nav__mobile.open { display: flex; }
+
+    .nav__mobile a {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav__mobile .nav__cta {
+      margin-top: 8px;
+      justify-content: center;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 68px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero__bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero__bg-blob--1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(240,110,160,0.12) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+    }
+
+    .hero__bg-blob--2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(94,207,193,0.10) 0%, transparent 70%);
+      bottom: 0;
+      left: -80px;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      padding: 60px 0 60px 0;
+    }
+
+    .hero__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pink-pale);
+      border: 1px solid var(--pink-light);
+      color: var(--pink);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+    }
+
+    .hero__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .hero__title .highlight {
+      color: var(--teal);
+      font-style: italic;
+    }
+
+    .hero__title .pink {
+      color: var(--pink);
+    }
+
+    .hero__sub {
+      font-size: 17px;
+      color: var(--ink-soft);
+      max-width: 44ch;
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pink);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      background: #d95a8e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(240, 110, 160, 0.38);
+    }
+
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--teal);
+      font-size: 15px;
+      font-weight: 700;
+      border: 2px solid var(--teal);
+      padding: 13px 26px;
+      border-radius: var(--radius-pill);
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-ghost:hover {
+      background: var(--teal);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost:active { transform: scale(0.98); }
+
+    .hero__trust {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero__trust-hearts {
+      display: flex;
+      gap: -4px;
+    }
+
+    .hero__trust-hearts svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .hero__trust-text {
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .hero__trust-text strong {
+      color: var(--ink);
+    }
+
+    /* Hero image side */
+    .hero__visual {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0 40px 20px;
+    }
+
+    .hero__img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .hero__img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero__img-badge {
+      position: absolute;
+      bottom: 28px;
+      left: -28px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 180px;
+    }
+
+    .hero__img-badge-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--pink-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero__img-badge-text {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+
+    .hero__img-badge-text strong {
+      display: block;
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .hero__img-pill {
+      position: absolute;
+      top: 24px;
+      right: -20px;
+      background: var(--teal);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 4px 16px rgba(94, 207, 193, 0.35);
+      white-space: nowrap;
+    }
+
+    /* ─── PRODUTOS ─────────────────────────────────────────────── */
+    .products {
+      padding: 96px 0;
+      background: var(--pink-pale);
+    }
+
+    .products__header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .products__header .section-title {
+      margin-bottom: 12px;
+    }
+
+    .products__header p {
+      font-size: 16px;
+      color: var(--ink-soft);
+      max-width: 50ch;
+      margin: 0 auto;
+    }
+
+    .products__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(240, 110, 160, 0.16);
+    }
+
+    .product-card--featured {
+      grid-column: span 2;
+    }
+
+    .product-card__img {
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-card--featured .product-card__img {
+      height: 320px;
+    }
+
+    .product-card:not(.product-card--featured) .product-card__img {
+      height: 220px;
+    }
+
+    .product-card:hover .product-card__img {
+      transform: scale(1.04);
+    }
+
+    .product-card__body {
+      padding: 20px 22px 22px;
+    }
+
+    .product-card__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .product-card__desc {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* Second row: 3 equal cards */
+    .products__grid-row2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    /* ─── HISTORIA ─────────────────────────────────────────────── */
+    .historia {
+      padding: 96px 0;
+      background: var(--white);
+    }
+
+    .historia__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .historia__images {
+      position: relative;
+    }
+
+    .historia__img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+
+    .historia__img-accent {
+      position: absolute;
+      bottom: -28px;
+      right: -28px;
+      width: 52%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      border: 5px solid var(--white);
+      box-shadow: var(--shadow-card);
+    }
+
+    .historia__content {
+      padding-bottom: 28px;
+    }
+
+    .historia__content .section-title {
+      margin-bottom: 20px;
+    }
+
+    .historia__text {
+      font-size: 16px;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .historia__text strong {
+      color: var(--pink);
+      font-weight: 700;
+    }
+
+    .historia__pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .historia__pillar {
+      background: var(--teal-pale);
+      border: 1px solid var(--teal-light);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+    }
+
+    .historia__pillar-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .historia__pillar h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .historia__pillar p {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    /* ─── HORARIOS ─────────────────────────────────────────────── */
+    .horarios {
+      padding: 96px 0;
+      background: var(--teal-pale);
+    }
+
+    .horarios__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .horarios__header {
+      margin-bottom: 36px;
+    }
+
+    .horarios__header .section-title {
+      margin-bottom: 12px;
+    }
+
+    .horarios__header p {
+      font-size: 16px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    .horarios__list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .horario-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      border: 1px solid rgba(94, 207, 193, 0.2);
+    }
+
+    .horario-row--closed {
+      opacity: 0.65;
+    }
+
+    .horario-row__day {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .horario-row__time {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--teal);
+    }
+
+    .horario-row--closed .horario-row__time {
+      color: var(--pink);
+    }
+
+    /* Info card */
+    .horarios__card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border);
+    }
+
+    .horarios__card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .horarios__card-text {
+      font-size: 15px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .horarios__card-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .contact-line__icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-line__icon--teal {
+      background: var(--teal-light);
+      color: var(--teal);
+    }
+
+    .contact-line__icon--pink {
+      background: var(--pink-light);
+      color: var(--pink);
+    }
+
+    /* ─── ENCOMENDA (CTA SECTION) ──────────────────────────────── */
+    .cta-section {
+      padding: 96px 0;
+      background: var(--pink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section__blob {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    .cta-section__blob--1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.08);
+      top: -120px;
+      right: -80px;
+    }
+
+    .cta-section__blob--2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.06);
+      bottom: -80px;
+      left: -60px;
+    }
+
+    .cta-section__inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .cta-section__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .cta-section__sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.85);
+      max-width: 46ch;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: var(--pink);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: var(--radius-pill);
+      transition: transform var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.18);
+    }
+
+    .btn-white:active { transform: scale(0.98); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.7);
+      padding: 56px 0 32px;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer__brand .nav__logo-name {
+      color: var(--teal);
+      font-size: 22px;
+    }
+
+    .footer__brand .nav__logo-sub {
+      color: var(--pink);
+    }
+
+    .footer__brand-text {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .footer__brand-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .footer__social-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .footer__social-link:hover {
+      background: var(--pink);
+      color: #fff;
+    }
+
+    .footer__col-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      transition: color var(--transition);
+    }
+
+    .footer__links a:hover { color: var(--pink); }
+
+    .footer__contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .footer__contact-item svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--teal);
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .footer__bottom a {
+      color: var(--pink);
+    }
+
+    /* ─── ANIMATIONS ───────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .products__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .product-card--featured {
+        grid-column: span 2;
+      }
+      .products__grid-row2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav__links,
+      .nav__cta {
+        display: none;
+      }
+      .nav__hamburger {
+        display: flex;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 100px 0 60px;
+      }
+      .hero__visual {
+        display: none;
+      }
+      .hero__content {
+        padding: 0;
+      }
+      .hero__sub {
+        max-width: 100%;
+      }
+
+      .products__grid {
+        grid-template-columns: 1fr;
+      }
+      .product-card--featured {
+        grid-column: span 1;
+      }
+      .product-card--featured .product-card__img {
+        height: 260px;
+      }
+      .products__grid-row2 {
+        grid-template-columns: 1fr;
+      }
+
+      .historia__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .historia__img-accent {
+        display: none;
+      }
+      .historia__pillars {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .horarios__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer__bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .product-card,
+      .btn-primary,
+      .btn-ghost,
+      .btn-white,
+      .nav__cta {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────── -->
+  <header class="nav" id="nav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+
+        <a href="#inicio" class="nav__logo" aria-label="Chelly's Confeitaria - Inicio">
+          <!-- Logo cupcake SVG (inline, fiel ao original) -->
+          <svg class="nav__logo-mark" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- wrapper cup teal -->
+            <rect x="20" y="46" width="40" height="24" rx="4" fill="#5ECFC1" stroke="#3D2C2C" stroke-width="2"/>
+            <!-- ridges -->
+            <line x1="31" y1="46" x2="31" y2="70" stroke="#3D2C2C" stroke-width="1.5"/>
+            <line x1="40" y1="46" x2="40" y2="70" stroke="#3D2C2C" stroke-width="1.5"/>
+            <line x1="49" y1="46" x2="49" y2="70" stroke="#3D2C2C" stroke-width="1.5"/>
+            <!-- cream -->
+            <path d="M17 46 Q20 38 25 38 Q27 32 33 33 Q36 24 40 24 Q44 24 47 33 Q53 32 55 38 Q60 38 63 46 Z" fill="#FAE8C0" stroke="#3D2C2C" stroke-width="1.5"/>
+            <!-- frosting pink -->
+            <path d="M18 44 Q22 36 40 34 Q58 36 62 44" stroke="#F06EA0" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- heart on top -->
+            <path d="M40 22 C40 22 36 18 36 15 C36 12.5 38.5 11 40 13 C41.5 11 44 12.5 44 15 C44 18 40 22 40 22Z" fill="#F06EA0" stroke="#3D2C2C" stroke-width="1"/>
+            <!-- sprinkles -->
+            <rect x="28" y="36" width="4" height="2" rx="1" fill="#5ECFC1" transform="rotate(-30 28 36)"/>
+            <rect x="48" y="38" width="4" height="2" rx="1" fill="#5ECFC1" transform="rotate(20 48 38)"/>
+            <rect x="38" y="29" width="3" height="1.5" rx="0.75" fill="#fff" transform="rotate(10 38 29)"/>
+          </svg>
+          <div class="nav__logo-text">
+            <span class="nav__logo-name">CHELLYS</span>
+            <span class="nav__logo-sub">Confeitaria</span>
+          </div>
+        </a>
+
+        <nav aria-label="Menu principal">
+          <ul class="nav__links">
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#historia">Nossa Historia</a></li>
+            <li><a href="#horarios">Horarios</a></li>
+          </ul>
+        </nav>
+
+        <a href="https://wa.me/5582999707321" target="_blank" rel="noopener noreferrer" class="nav__cta" aria-label="Fazer pedido pelo WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Fazer Pedido
+        </a>
+
+        <button class="nav__hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <nav class="nav__mobile" id="mobile-menu" aria-label="Menu mobile">
+    <a href="#produtos" class="mobile-link">Produtos</a>
+    <a href="#historia" class="mobile-link">Nossa Historia</a>
+    <a href="#horarios" class="mobile-link">Horarios</a>
+    <a href="https://wa.me/5582999707321" target="_blank" rel="noopener noreferrer" class="nav__cta">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Fazer Pedido
+    </a>
+  </nav>
+
+  <main id="inicio">
+
+    <!-- ─── HERO ──────────────────────────────────────────────── -->
+    <section class="hero" aria-label="Apresentacao">
+      <div class="hero__bg-blob hero__bg-blob--1" aria-hidden="true"></div>
+      <div class="hero__bg-blob hero__bg-blob--2" aria-hidden="true"></div>
+
+      <div class="container" style="display: contents;">
+        <div class="hero__content container reveal" style="padding-left: 24px; padding-right: 0;">
+          <div class="hero__tag" aria-label="Confeitaria artesanal em Alagoas">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            Feito com amor em Alagoas
+          </div>
+
+          <h1 class="hero__title">
+            Doces que contam<br>
+            <span class="highlight">historias</span> e criam<br>
+            <span class="pink">memorias</span>
+          </h1>
+
+          <p class="hero__sub">
+            Bolos decorados, cookies recheados e muito mais - tudo feito artesanalmente com carinho para tornar cada momento especial.
+          </p>
+
+          <div class="hero__actions">
+            <a href="https://wa.me/5582999707321" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Fazer Pedido
+            </a>
+            <a href="#produtos" class="btn-ghost">Ver Produtos</a>
+          </div>
+
+          <div class="hero__trust">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#F06EA0" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <p class="hero__trust-text">Atendimento <strong>personalizado</strong> e take away na loja</p>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal reveal-delay-2">
+          <div class="hero__img-wrap">
+            <img
+              src="produtos/IMG-20260910-WA0016.jpg"
+              alt="Bolo de caramelo com amendoim - Chelly's Confeitaria"
+              class="hero__img-main"
+              loading="eager"
+              width="480"
+              height="600"
+            />
+            <div class="hero__img-badge" aria-label="Feito com amor artesanalmente">
+              <div class="hero__img-badge-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#F06EA0"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <div class="hero__img-badge-text">
+                <strong>100% artesanal</strong>
+                Feito com amor
+              </div>
+            </div>
+            <div class="hero__img-pill" aria-label="Atendimento personalizado">Atendimento personalizado</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PRODUTOS ─────────────────────────────────────────── -->
+    <section class="products" id="produtos" aria-labelledby="produtos-title">
+      <div class="container">
+        <div class="products__header reveal">
+          <span class="section-label">Cardapio</span>
+          <h2 class="section-title" id="produtos-title">Nossas <span>delícias</span></h2>
+          <p>Cada produto feito artesanalmente, com ingredientes selecionados e muito carinho.</p>
+        </div>
+
+        <!-- Row 1: featured + 1 -->
+        <div class="products__grid">
+          <article class="product-card product-card--featured reveal reveal-delay-1">
+            <img
+              src="produtos/IMG-20260910-WA0016.jpg"
+              alt="Bolo de caramelo com amendoim tostado"
+              class="product-card__img"
+              loading="lazy"
+            />
+            <div class="product-card__body">
+              <h3 class="product-card__name">Bolo de Caramelo</h3>
+              <p class="product-card__desc">Bolo de andares com creme de caramelo, amendoim tostado e cobertura generosa de doce de leite. Uma experiencia indulgente.</p>
+            </div>
+          </article>
+
+          <article class="product-card reveal reveal-delay-2">
+            <img
+              src="produtos/IMG-20260910-WA0013.jpg"
+              alt="Fatia de bolo de chocolate com mousse"
+              class="product-card__img"
+              loading="lazy"
+            />
+            <div class="product-card__body">
+              <h3 class="product-card__name">Bolo de Chocolate</h3>
+              <p class="product-card__desc">Fatia irresistivel com camadas de bolo, creme de chocolate e mousse enrolada artesanalmente.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Row 2: 3 cookies -->
+        <div class="products__grid-row2">
+          <article class="product-card reveal reveal-delay-1">
+            <img
+              src="produtos/IMG-20260910-WA0014.jpg"
+              alt="Brownie cookie recheado com ganache de chocolate"
+              class="product-card__img"
+              style="height: 240px;"
+              loading="lazy"
+            />
+            <div class="product-card__body">
+              <h3 class="product-card__name">Brownie Cookie</h3>
+              <p class="product-card__desc">Cookie estilo brownie com recheio cremoso de ganache de chocolate. Crocante por fora, derretido por dentro.</p>
+            </div>
+          </article>
+
+          <article class="product-card reveal reveal-delay-2">
+            <img
+              src="produtos/IMG-20260910-WA0015.jpg"
+              alt="Cookie Red Velvet recheado com cream cheese"
+              class="product-card__img"
+              style="height: 240px;"
+              loading="lazy"
+            />
+            <div class="product-card__body">
+              <h3 class="product-card__name">Cookie Red Velvet</h3>
+              <p class="product-card__desc">Cookie vermelho vibrante com recheio generoso de cream cheese. Bonito e irresistivel.</p>
+            </div>
+          </article>
+
+          <article class="product-card reveal reveal-delay-3">
+            <img
+              src="produtos/IMG-20260910-WA0017.jpg"
+              alt="Cookie de baunilha recheado com Nutella"
+              class="product-card__img"
+              style="height: 240px;"
+              loading="lazy"
+            />
+            <div class="product-card__body">
+              <h3 class="product-card__name">Cookie de Baunilha</h3>
+              <p class="product-card__desc">Cookie dourado com gotas de chocolate e recheio de Nutella derretendo a cada mordida.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── HISTORIA ─────────────────────────────────────────── -->
+    <section class="historia" id="historia" aria-labelledby="historia-title">
+      <div class="container">
+        <div class="historia__inner">
+
+          <div class="historia__images reveal">
+            <img
+              src="produtos/IMG-20260910-WA0018.jpg"
+              alt="Brownie artesanal da Chelly's Confeitaria"
+              class="historia__img-main"
+              loading="lazy"
+            />
+            <img
+              src="produtos/IMG-20260910-WA0019.jpg"
+              alt="Produto artesanal da Chelly's"
+              class="historia__img-accent"
+              loading="lazy"
+              aria-hidden="true"
+            />
+          </div>
+
+          <div class="historia__content reveal reveal-delay-2">
+            <span class="section-label">Nossa Historia</span>
+            <h2 class="section-title" id="historia-title">
+              Uma paixao que<br><span>virou sonho</span>
+            </h2>
+
+            <p class="historia__text">
+              Tudo comeou em <strong>2010</strong>, fazendo bolos para a familia em Recife. O que era amor pela confeitaria virou vocacao - e depois de cursos nacionais e internacionais, a jornada continuou em Alagoas.
+            </p>
+            <p class="historia__text">
+              Os bolos feitos para os mêsversarios do filho chamaram a atencao dos vizinhos, que logo comearam a encomendar. Assim nasceu, organicamente, o negocio.
+            </p>
+            <p class="historia__text">
+              Depois de anos trabalhando em casa, chegou a hora de materializar o sonho: a <strong>Chelly's Confeitaria</strong> abriu suas portas com atendimento intimista, pessoal e com muito cuidado em cada detalhe.
+            </p>
+
+            <div class="historia__pillars">
+              <div class="historia__pillar">
+                <svg class="historia__pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <h4>Feito com amor</h4>
+                <p>Cada produto sai das maos da proprietaria com cuidado artesanal.</p>
+              </div>
+              <div class="historia__pillar">
+                <svg class="historia__pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                <h4>Atendimento pessoal</h4>
+                <p>Voce e recebido e atendido diretamente pela Chelly, sem intermediarios.</p>
+              </div>
+              <div class="historia__pillar">
+                <svg class="historia__pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <h4>Qualidade garantida</h4>
+                <p>Formacao com cursos nacionais e internacionais de confeitaria.</p>
+              </div>
+              <div class="historia__pillar">
+                <svg class="historia__pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <h4>Loja fisica</h4>
+                <p>Espaco fisico pensado para um atendimento acolhedor e especial.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── HORARIOS ─────────────────────────────────────────── -->
+    <section class="horarios" id="horarios" aria-labelledby="horarios-title">
+      <div class="container">
+        <div class="horarios__inner">
+
+          <div>
+            <div class="horarios__header reveal">
+              <span class="section-label">Funcionamento</span>
+              <h2 class="section-title" id="horarios-title">
+                Quando nos <span>encontrar</span>
+              </h2>
+              <p>Venha nos visitar ou faca seu pedido pelo WhatsApp. Estamos esperando voce com doces fresquinhos.</p>
+            </div>
+
+            <div class="horarios__list reveal reveal-delay-1" role="list" aria-label="Horario de funcionamento">
+              <div class="horario-row" role="listitem">
+                <span class="horario-row__day">Segunda</span>
+                <span class="horario-row__time">14:30 as 18:30</span>
+              </div>
+              <div class="horario-row horario-row--closed" role="listitem">
+                <span class="horario-row__day">Terca</span>
+                <span class="horario-row__time">Fechado</span>
+              </div>
+              <div class="horario-row" role="listitem">
+                <span class="horario-row__day">Quarta</span>
+                <span class="horario-row__time">14:30 as 18:30</span>
+              </div>
+              <div class="horario-row" role="listitem">
+                <span class="horario-row__day">Quinta</span>
+                <span class="horario-row__time">14:30 as 18:30</span>
+              </div>
+              <div class="horario-row" role="listitem">
+                <span class="horario-row__day">Sexta</span>
+                <span class="horario-row__time">14:30 as 18:30</span>
+              </div>
+              <div class="horario-row" role="listitem">
+                <span class="horario-row__day">Sabado</span>
+                <span class="horario-row__time">13:00 as 18:30</span>
+              </div>
+              <div class="horario-row horario-row--closed" role="listitem">
+                <span class="horario-row__day">Domingo</span>
+                <span class="horario-row__time">Fechado</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="horarios__card reveal reveal-delay-2">
+            <h3 class="horarios__card-title">Fale comigo</h3>
+            <p class="horarios__card-text">
+              Prefere fazer seu pedido de casa? Me chama no WhatsApp ou me siga no Instagram para ver as novidades do dia.
+            </p>
+            <div class="horarios__card-contacts">
+              <a href="https://wa.me/5582999707321" target="_blank" rel="noopener noreferrer" class="contact-line" aria-label="Chamar no WhatsApp 82 99970-7321">
+                <span class="contact-line__icon contact-line__icon--teal" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                </span>
+                (82) 99970-7321
+              </a>
+              <a href="https://instagram.com/confeitariachellys" target="_blank" rel="noopener noreferrer" class="contact-line" aria-label="Ver perfil no Instagram @confeitariachellys">
+                <span class="contact-line__icon contact-line__icon--pink" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </span>
+                @confeitariachellys
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA SECTION ──────────────────────────────────────── -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <div class="cta-section__blob cta-section__blob--1" aria-hidden="true"></div>
+      <div class="cta-section__blob cta-section__blob--2" aria-hidden="true"></div>
+      <div class="container">
+        <div class="cta-section__inner reveal">
+          <h2 class="cta-section__title" id="cta-title">
+            Pronto para adocar seu dia?
+          </h2>
+          <p class="cta-section__sub">
+            Faca seu pedido agora e receba um atendimento unico e personalizado. A Chelly te espera.
+          </p>
+          <a href="https://wa.me/5582999707321" target="_blank" rel="noopener noreferrer" class="btn-white" aria-label="Fazer pedido agora pelo WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Fazer Pedido Agora
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="footer" aria-label="Rodape">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Brand -->
+        <div class="footer__brand">
+          <div class="nav__logo" style="margin-bottom: 0;">
+            <svg width="38" height="38" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="20" y="46" width="40" height="24" rx="4" fill="#5ECFC1" stroke="#3D2C2C" stroke-width="2"/>
+              <line x1="31" y1="46" x2="31" y2="70" stroke="#3D2C2C" stroke-width="1.5"/>
+              <line x1="40" y1="46" x2="40" y2="70" stroke="#3D2C2C" stroke-width="1.5"/>
+              <line x1="49" y1="46" x2="49" y2="70" stroke="#3D2C2C" stroke-width="1.5"/>
+              <path d="M17 46 Q20 38 25 38 Q27 32 33 33 Q36 24 40 24 Q44 24 47 33 Q53 32 55 38 Q60 38 63 46 Z" fill="#FAE8C0" stroke="#3D2C2C" stroke-width="1.5"/>
+              <path d="M18 44 Q22 36 40 34 Q58 36 62 44" stroke="#F06EA0" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M40 22 C40 22 36 18 36 15 C36 12.5 38.5 11 40 13 C41.5 11 44 12.5 44 15 C44 18 40 22 40 22Z" fill="#F06EA0" stroke="#3D2C2C" stroke-width="1"/>
+              <rect x="28" y="36" width="4" height="2" rx="1" fill="#5ECFC1" transform="rotate(-30 28 36)"/>
+              <rect x="48" y="38" width="4" height="2" rx="1" fill="#5ECFC1" transform="rotate(20 48 38)"/>
+              <rect x="38" y="29" width="3" height="1.5" rx="0.75" fill="#fff" transform="rotate(10 38 29)"/>
+            </svg>
+            <div class="nav__logo-text">
+              <span class="nav__logo-name">CHELLYS</span>
+              <span class="nav__logo-sub">Confeitaria</span>
+            </div>
+          </div>
+          <p class="footer__brand-text">
+            Confeitaria artesanal em Alagoas, com atendimento personalizado, doces feitos com amor e take away na loja.
+          </p>
+          <div class="footer__brand-social">
+            <a href="https://instagram.com/confeitariachellys" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram da Chelly's Confeitaria">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://wa.me/5582999707321" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="WhatsApp da Chelly's Confeitaria">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <p class="footer__col-title">Navegacao</p>
+          <ul class="footer__links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#historia">Nossa Historia</a></li>
+            <li><a href="#horarios">Horarios</a></li>
+          </ul>
+        </div>
+
+        <!-- Contato -->
+        <div>
+          <p class="footer__col-title">Contato</p>
+          <div class="footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.11h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l1.25-1.25a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+5582999707321">(82) 99970-7321</a>
+          </div>
+          <div class="footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <a href="https://instagram.com/confeitariachellys" target="_blank" rel="noopener noreferrer">@confeitariachellys</a>
+          </div>
+          <div class="footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Alagoas, Brasil</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <span>2026 Chelly's Confeitaria. Todos os direitos reservados.</span>
+        <span>Feito com <svg width="12" height="12" viewBox="0 0 24 24" fill="#F06EA0" style="display:inline;vertical-align:middle;" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> para a Chelly</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── SCRIPT ───────────────────────────────────────────────── -->
+  <script>
+    // Nav scroll shadow
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Mobile hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll reveal with IntersectionObserver
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
